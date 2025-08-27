@@ -1,0 +1,40 @@
+name: Deploy Hub (Terraform)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (Hub)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.HUB_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Terraform Init
+        working-directory: ./terraform/hub
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: ./terraform/hub
+        env:
+          TF_VAR_region: ${{ vars.AWS_REGION }}
+          TF_VAR_orchestrator_account_id: ${{ vars.HUB_ACCOUNT_ID }}
+          TF_VAR_name_prefix: ${{ vars.NAME_PREFIX }}
+          TF_VAR_bedrock_agent_id: ${{ secrets.BEDROCK_AGENT_ID }}
+          TF_VAR_bedrock_agent_alias_id: ${{ secrets.BEDROCK_AGENT_ALIAS_ID }}
+          TF_VAR_wave_rules: ${{ vars.WAVE_RULES_JSON }}
+        run: terraform apply -auto-approve

@@ -1,0 +1,8 @@
+region = "us-east-1"
+orchestrator_account_id = "111111111111"
+name_prefix = "eksupgrade"
+bedrock_agent_id = "AGENT_ID"
+bedrock_agent_alias_id = "ALIAS_ID"
+wave_rules = [
+  { name="use1-wave1", schedule_expression="cron(0 3 ? * SUN *)", accounts=["222222222222"], regions=["us-east-1"] }
+]

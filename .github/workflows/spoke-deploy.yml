@@ -1,0 +1,40 @@
+name: Deploy Spokes (Terraform Matrix)
+
+on:
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        account_id: ${{ fromJson(vars.TARGET_ACCOUNTS_JSON) }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (Spoke)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::${{ matrix.account_id }}:role/${{ vars.SPOKE_DEPLOY_ROLE || 'GitHubOIDCDeploy' }}
+          aws-region: ${{ vars.AWS_REGION || 'us-east-1' }}
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.6
+
+      - name: Terraform Init
+        working-directory: ./terraform/spoke
+        run: terraform init
+
+      - name: Terraform Apply
+        working-directory: ./terraform/spoke
+        env:
+          TF_VAR_region: ${{ vars.AWS_REGION }}
+          TF_VAR_orchestrator_account_id: ${{ vars.HUB_ACCOUNT_ID }}
+          TF_VAR_role_name: PatchExecRole
+        run: terraform apply -auto-approve

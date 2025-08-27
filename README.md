@@ -12,14 +12,12 @@ This platform deploys an **enterprise-grade** EKS upgrade orchestrator using hub
 ## 📋 Table of Contents
 
 - [Architecture Overview](#architecture-overview)
-- [Quick Start](#quick-start)
-- [Configuration](#configuration)
-- [Security Services](#security-services)
-- [API Reference](#api-reference)
-- [Monitoring](#monitoring)
-- [Troubleshooting](#troubleshooting)
-- [Contributing](#contributing)
-- [Support](#support)
+- [Variables (hub)](#variables-hub)
+- [Variables (spoke)](#variables-spoke)
+- [Deploy – Hub](#deploy--hub)
+- [Deploy – Spoke](#deploy--spoke)
+- [Manual Approval](#manual-approval)
+- [CloudWatch Dashboard](#cloudwatch-dashboard)
 
 ## 🏗️ Architecture Overview
 

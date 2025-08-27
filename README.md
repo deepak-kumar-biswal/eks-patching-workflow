@@ -1,20 +1,76 @@
-# EKS Upgrade & Karpenter – Terraform (Hub & Spoke)
+# 🚀 Enterprise EKS Multi-Account Upgrade Platform
 
-This codebase deploys a **production-grade** EKS upgrade orchestrator with **per-account wave windows**, **manual approval**, **SNS alerts**, **Bedrock analysis**, and a **CloudWatch dashboard**. It also provides the **cross-account role** for clusters in spoke accounts.
+[![Hub Deploy](https://github.com/your-org/eks-patching-workflow/workflows/Hub%20Deploy/badge.svg)](https://github.com/your-org/eks-patching-workflow/actions)
+[![Spoke Deploy](https://github.com/your-org/eks-patching-workflow/workflows/Spoke%20Deploy/badge.svg)](https://github.com/your-org/eks-patching-workflow/actions)
+[![Security Scan](https://github.com/your-org/eks-patching-workflow/workflows/Security%20Scan/badge.svg)](https://github.com/your-org/eks-patching-workflow/actions)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Structure
+## 🏆 Production-Grade EKS Upgrade Orchestration
+
+This platform deploys an **enterprise-grade** EKS upgrade orchestrator using hub-and-spoke architecture for **1000+ AWS accounts** with automated upgrade workflows, Karpenter integration, manual approval gates, intelligent Bedrock analysis, and comprehensive monitoring.
+
+## 📋 Table of Contents
+
+- [Architecture Overview](#architecture-overview)
+- [Quick Start](#quick-start)
+- [Configuration](#configuration)
+- [Security Services](#security-services)
+- [API Reference](#api-reference)
+- [Monitoring](#monitoring)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [Support](#support)
+
+## 🏗️ Architecture Overview
+
 ```
-terraform/
-  hub/    # deploy in HUB (orchestrator) account
-  spoke/  # deploy in each TARGET (spoke) account
-.github/workflows/
-examples/
+┌─────────────────────────────────────────────────────────────────┐
+│                        HUB ACCOUNT                              │
+│                (EKS Upgrade Control Plane)                     │
+│  ┌─────────────────┐  ┌───────────────────┐  ┌───────────────┐ │
+│  │   EventBridge   │  │ Step Functions    │  │   Lambda      │ │
+│  │   (Scheduler)   │◄─┤   Orchestrator    │◄─┤   Processors  │ │
+│  │                 │  │                   │  │               │ │
+│  └─────────────────┘  └───────────────────┘  └───────────────┘ │
+│           │                      │                      │       │
+│           │             ┌────────▼────────┐            │       │
+│           │             │   Bedrock AI    │            │       │
+│           │             │   Analysis      │            │       │
+│           │             └─────────────────┘            │       │
+│           │                                            │       │
+│  ┌────────▼────────┐  ┌─────────────────┐  ┌──────────▼──────┐ │
+│  │   CloudWatch    │  │     SNS/SQS     │  │   DynamoDB      │ │
+│  │   Dashboard     │  │   Notifications │  │   State Store   │ │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
+└─────────────────────────────────┬───────────────────────────────┘
+                                  │ Cross-Account AssumeRole
+                                  │
+          ┌───────────────────────┼───────────────────────┐
+          │                       │                       │
+┌─────────▼─────────┐    ┌────────▼────────┐    ┌────────▼────────┐
+│  SPOKE ACCOUNT 1  │    │  SPOKE ACCOUNT 2 │    │ SPOKE ACCOUNT N │
+│                   │    │                  │    │                 │
+│ ┌───────────────┐ │    │ ┌──────────────┐ │    │ ┌─────────────┐ │
+│ │  Cross-Account│ │    │ │Cross-Account │ │    │ │Cross-Account│ │
+│ │  Exec Role    │ │    │ │ Exec Role    │ │    │ │ Exec Role   │ │
+│ └───────────────┘ │    │ └──────────────┘ │    │ └─────────────┘ │
+│ ┌───────────────┐ │    │ ┌──────────────┐ │    │ ┌─────────────┐ │
+│ │  EKS Cluster  │ │    │ │ EKS Cluster  │ │    │ │ EKS Cluster │ │
+│ │  + Karpenter  │ │    │ │ + Karpenter  │ │    │ │ + Karpenter │ │
+│ │  + Add-ons    │ │    │ │ + Add-ons    │ │    │ │ + Add-ons   │ │
+│ └───────────────┘ │    │ └──────────────┘ │    │ └─────────────┘ │
+└───────────────────┘    └──────────────────┘    └─────────────────┘
 ```
 
-## Prereqs
-- Terraform >= 1.5, AWS CLI, and an **OIDC-enabled GitHub role** in each account (or local credentials).
-- EKS clusters already exist and are healthy.
-- A controller instance or mechanism with `kubectl` for Karpenter (see `controllerInstanceId`).
+### Key Components
+
+- **🎯 Hub Account**: Centralized EKS upgrade orchestration
+- **🔄 Spoke Accounts**: Target accounts with EKS clusters
+- **📅 Wave Management**: Cluster grouping with maintenance windows
+- **🤖 AI Analysis**: Bedrock-powered upgrade impact assessment
+- **✅ Approval Gates**: Manual approval workflow with notifications
+- **🔄 Karpenter**: Automated node refresh and scaling
+- **📊 Monitoring**: Real-time dashboards and alerting
 
 ## Variables (hub)
 - `region` – e.g. `us-east-1`

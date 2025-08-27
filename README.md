@@ -1,9 +1,22 @@
-# 🚀 Enterprise EKS Multi-Account Upgrade Platform
+<div align="center">
+  <img src="https://img.shields.io/badge/🚀-EKS%20Upgrade%20Platform-blue?style=for-the-badge&logoColor=white" alt="EKS Upgrades"/>
+  <img src="https://img.shields.io/badge/🏢-Multi%20Account-orange?style=for-the-badge" alt="Multi Account"/>
+  <img src="https://img.shields.io/badge/⚡-Production%20Grade-green?style=for-the-badge" alt="Production Grade"/>
+</div>
+
+<div align="center">
+  <h1>🚀 Enterprise EKS Multi-Account Upgrade Platform</h1>
+  <p><strong>Enterprise-grade EKS upgrade orchestration for 1000+ AWS accounts</strong></p>
+</div>
+
+<div align="center">
 
 [![Hub Deploy](https://github.com/your-org/eks-patching-workflow/workflows/Hub%20Deploy/badge.svg)](https://github.com/your-org/eks-patching-workflow/actions)
 [![Spoke Deploy](https://github.com/your-org/eks-patching-workflow/workflows/Spoke%20Deploy/badge.svg)](https://github.com/your-org/eks-patching-workflow/actions)
 [![Security Scan](https://github.com/your-org/eks-patching-workflow/workflows/Security%20Scan/badge.svg)](https://github.com/your-org/eks-patching-workflow/actions)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+</div>
 
 ## 🏆 Production-Grade EKS Upgrade Orchestration
 

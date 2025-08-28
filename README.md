@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="https://img.shields.io/badge/🚀-EKS%20Upgrade%20Platform-blue?style=for-the-badge&logoColor=white" alt="EKS Upgrades"/>
-  <img src="https://img.shields.io/badge/🏢-Multi%20Account-orange?style=for-the-badge" alt="Multi Account"/>
-  <img src="https://img.shields.io/badge/⚡-Production%20Grade-green?style=for-the-badge" alt="Production Grade"/>
+  <img src="https://img.shields.io/badge/%F0%9F%9A%80-EKS%20Upgrade%20Platform-blue?style=for-the-badge&logoColor=white" alt="EKS Upgrades"/>
+  <img src="https://img.shields.io/badge/%F0%9F%8F%A2-Multi%20Account-orange?style=for-the-badge" alt="Multi Account"/>
+  <img src="https://img.shields.io/badge/%E2%9A%A1-Production%20Grade-green?style=for-the-badge" alt="Production Grade"/>
 </div>
 
 <div align="center">
@@ -11,10 +11,11 @@
 
 <div align="center">
 
-[![Hub Deploy](https://github.com/your-org/eks-patching-workflow/workflows/Hub%20Deploy/badge.svg)](https://github.com/your-org/eks-patching-workflow/actions)
-[![Spoke Deploy](https://github.com/your-org/eks-patching-workflow/workflows/Spoke%20Deploy/badge.svg)](https://github.com/your-org/eks-patching-workflow/actions)
-[![Security Scan](https://github.com/your-org/eks-patching-workflow/workflows/Security%20Scan/badge.svg)](https://github.com/your-org/eks-patching-workflow/actions)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Terraform](https://img.shields.io/badge/Terraform-1.5%2B-623CE4?style=for-the-badge&logo=terraform&logoColor=white)](https://www.terraform.io/)
+[![AWS](https://img.shields.io/badge/AWS-EKS-FF9900?style=for-the-badge&logo=amazon-aws&logoColor=white)](https://aws.amazon.com/eks/)
+[![Kubernetes](https://img.shields.io/badge/Kubernetes-1.24%2B-326CE5?style=for-the-badge&logo=kubernetes&logoColor=white)](https://kubernetes.io/)
+[![Python](https://img.shields.io/badge/Python-3.9%2B-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 </div>
 
@@ -24,7 +25,7 @@ This platform deploys an **enterprise-grade** EKS upgrade orchestrator using hub
 
 ## 📋 Table of Contents
 
-- [Architecture Overview](#architecture-overview)
+- [🏗️ Architecture Overview](#️-architecture-overview)
 - [Variables (hub)](#variables-hub)
 - [Variables (spoke)](#variables-spoke)
 - [Deploy – Hub](#deploy--hub)
